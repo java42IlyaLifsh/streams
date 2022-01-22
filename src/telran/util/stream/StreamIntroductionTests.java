@@ -1,5 +1,5 @@
 package telran.util.stream;
-//IlyaL
+//c
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.*;
@@ -57,9 +57,10 @@ class StreamIntroductionTests {
 		assertArrayEquals(new int[] {1, 2,3}, list.stream().mapToInt(n -> n).toArray());
 	}
 	private Integer [] getLotoNumbers(int nNumbers, int min, int max) {
-		//TODO
+		 
 		//using one stream to get array of unique random numbers in the given range
-		return null;
+		return new Random().ints(min, max+1).distinct().limit(nNumbers)
+				.boxed().toArray(Integer[]::new);
 	}
 	@Test
 	void lotoTest () {
@@ -76,10 +77,18 @@ class StreamIntroductionTests {
 	 * complexity O[N] 
 	 */
 	private boolean isHalfSum(int []ar) {
-		//TODO 
+	if (ar.length<3) return false;
+	int desSum=Arrays.stream(ar).sum() /2;
+	HashSet <Integer> hash = new HashSet<>();
+	for (int n:ar) {
+		int x=desSum-n;
+		if (hash.contains(x)) return true;
+		hash.add(n);
+		}
 		return false;
-		
 	}
+		
+
 	@Test
 	void isHalfSumTest() {
 		int ar[] = {1,2, 10, -7};
