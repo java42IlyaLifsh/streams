@@ -56,6 +56,7 @@ class StreamIntroductionTests {
 		assertEquals(6, list.stream().mapToInt(n -> n).sum());
 		assertArrayEquals(new int[] {1, 2,3}, list.stream().mapToInt(n -> n).toArray());
 	}
+	// V.R. OK
 	private Integer [] getLotoNumbers(int nNumbers, int min, int max) {
 		 
 		//using one stream to get array of unique random numbers in the given range
@@ -77,6 +78,7 @@ class StreamIntroductionTests {
 	 * complexity O[N] 
 	 */
 	private boolean isHalfSum(int []ar) {
+		// V.R. Cool!
 	if (ar.length<3) return false;
 	int desSum=Arrays.stream(ar).sum() /2;
 	HashSet <Integer> hash = new HashSet<>();
@@ -95,6 +97,12 @@ class StreamIntroductionTests {
 		assertTrue(isHalfSum(ar));
 		int ar1[] = {1, 2, 10, 7};
 		assertFalse(isHalfSum(ar1));
+		/* V.R. Some additional tests will not disturb. Like following:
+		int ar2[] = {1,2};
+		assertFalse(isHalfSum(ar2));
+		int ar3[] = {13, 13, 13, 13};
+		assertTrue(isHalfSum(ar3));
+		*/
 	}
 
 }
