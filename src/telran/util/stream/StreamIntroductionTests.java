@@ -3,6 +3,7 @@ package telran.util.stream;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.*;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -189,21 +190,34 @@ class StreamIntroductionTests {
 				.collect(Collectors.joining("\n")) + "\n";
 	}
 	private void arrayShuffling(int ar[]) {
-		//TODO printing out array in the shuffling order
+		//printing out array in the shuffling order
 		//with out any additional collections
 		//one pipeline 
+		System.out.println("\n\narrayShuffling");
+		new Random().ints(0,ar.length).distinct().limit(ar.length)
+		.forEach(i->System.out.print(ar[i] + " ; "));
+		System.out.println();
 	}
 	@Test
 	void shufflingTest() {
 		arrayShuffling(new int[] {1,2,3,4});
 	}
 	private void digitStatistics() {
-		//TODO 
+		//
 		//generating 1_000_000 random positive numbers [1-Integer.MAX_VALUE)
 		//display out digits and occurrences sorted by occurrences in descending order
 		// 1: <occurrences value>
 		// 2: ...
-		// 4: 
+		// 4:
+		System.out.println("digitStatistics");
+		new Random().ints(1_000_000, 1, Integer.MAX_VALUE)
+		.flatMap(n->Integer.toString(n).chars()).boxed()
+		.collect(Collectors.groupingBy(n->n, Collectors.counting()))
+		.entrySet().stream()
+		.sorted((e1, e2) ->Long.compare(e2.getValue(), e1.getValue()))
+		.forEach(e-> System.out.printf("%c : %d\n", e.getKey(), e.getValue()));
+		System.out.println();
+		
 	}
 	@Test
 	void digitStatisticsTest() {
